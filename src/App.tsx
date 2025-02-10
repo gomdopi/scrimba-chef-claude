@@ -1,11 +1,11 @@
-import Form from "./components/Form"
+import Main from "./components/Main"
 import Header from "./components/Header"
 
 export default function App() {
   return (
     <>
       <Header />
-      <Form />
+      <Main />
     </>
   )
 }
