@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import ClaudeRecipe from "./ClaudeRecipe"
 import IngredientsList from "./IngredientsList"
 
@@ -19,6 +19,16 @@ export default function Main() {
     setRecipeShown(prevRecipeShown => !prevRecipeShown)
   }
 
+  const recipeSection = useRef(null)
+
+  useEffect(() => {
+    if (recipeShown && recipeSection.current !== null) {
+      ;(recipeSection!.current! as Element).scrollIntoView({
+        behavior: "smooth",
+      })
+    }
+  }, [recipeShown])
+
   return (
     <main>
       <form action={addIngredient} className="add-ingredient-form">
@@ -32,6 +42,7 @@ export default function Main() {
       </form>
       {ingredients.length > 0 && (
         <IngredientsList
+          ref={recipeSection}
           ingredients={ingredients}
           toggleRecipeShown={toggleRecipeShown}
         />
